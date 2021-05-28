@@ -8,7 +8,13 @@ $router.addRouter($static)
 
 $router.get('/', :index, function(params)
     output = Base(function(params)
-        print('chegou')
+        include 'templates/components/IndexCard.ultra.html'
+        items = JSON.parse(ApiClient.getToc('docs'))
+        content = ''
+        for (items, item)
+            content += IndexCard(item)
+        end
+        live content
     end)
     live output(params)
 end)
