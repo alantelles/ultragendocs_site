@@ -1,0 +1,13 @@
+@function Article(title, teaser, text)
+<article class="docs-article" id="section-1">
+    <header class="docs-header">
+        <h1 class="docs-heading" style="padding-bottom: 15px; border-bottom: solid 1px rgb(179, 0, 0)">{{ title }} <!--<span class="docs-time">Last updated: 2019-06-01</span>--></h1>
+        <section class="docs-intro">
+            <h3>{{ teaser }}</h3>
+        </section><!--//docs-intro-->
+        
+        <section class="docs-section">
+            {{ text }}
+        </section>
+</article>
+@end

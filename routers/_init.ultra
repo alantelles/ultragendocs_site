@@ -1,13 +1,16 @@
 include @Core.Web.Router
 
 include 'routers/static.ultra'
+include 'routers/docs.ultra'
 
 $router = new Router()
 
 $router.addRouter($static)
+$router.addRouter($docs)
 
 $router.get('/', :index, function(params)
-    output = Base(function(params)
+    include 'templates/Index.ultra.html'
+    output = Base(function(params)        
         include 'templates/components/IndexCard.ultra.html'
         items = JSON.parse(ApiClient.getToc('docs'))
         content = ''

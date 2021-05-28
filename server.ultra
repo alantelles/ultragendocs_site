@@ -1,4 +1,17 @@
 include @Core.Brook.Server
 
 s = new Server(5000, true)
+s.context = {
+    'pageTitle': 'UltraGen | scripting language | template engine | website machine',
+    'redTheme': """
+    <style>
+        .theme-bg-dark, .btn-primary {background-color: #af2603;}
+        .btn-primary:hover {background-color: #c2492b;}
+        .theme-icon-holder, a, .btn-light, .social-list li a {color: #be2903;}
+        .docs-nav .nav-link.active {color: #be2903; border-color: #be2903}
+        .btn-light:hover ,.social-list li a:hover {color: #ce5435;}
+        a.theme-link:hover {text-decoration-color: #be2903; color: #be2903;}
+    </style>
+    """
+}
 s.run()

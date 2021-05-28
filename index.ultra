@@ -3,8 +3,6 @@ include @Core.Request
 
 include 'routers'
 include 'services/api_client.ultra'
-include 'templates/Base.ultra.html'
-
 
 $router.getMatch().localize()
 

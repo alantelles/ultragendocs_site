@@ -1,0 +1,24 @@
+$docs = new Router(:docs, '/docs')
+
+$docs.get('/test', :test, function(params)
+    include 'public/docs-page.html'
+end)
+
+$docs.get('/:article', :article, function(params)
+    include 'templates/ArticlePage.ultra.html'
+    include 'templates/components/Navbar.ultra.html'
+    navbar = Navbar()
+    output = ArticlePage(navbar, function(params)
+        include 'templates/components/Article.ultra.html'
+        include @Core.Markdown
+        doc = ApiClient.getArticle('docs', 'getting-started')
+        splitted = doc.split('\n')
+        
+        title = splitted[0].slice(2)
+        teaser = splitted[2].slice(1)
+        text = Markdown.parse('\n'.join(splitted.slice(4)))
+        content = Article(title, teaser, text)
+        live content
+    end)
+    live output(params)
+end)
