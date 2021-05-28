@@ -1,9 +1,14 @@
-@function Navbar()
+@function Navbar(toc)
 <nav id="docs-nav" class="docs-nav navbar">
     <ul class="section-items list-unstyled nav flex-column pb-3">
-        <li class="nav-item section-title"><a class="nav-link" href="{{ $docs.urlFor(:article, {'article': 'getting-started'}) }}"><span class="theme-icon-holder mr-2"><i class="fas fa-map-signs"></i></span>Introduction</a></li>
-        
+@for (toc, entry)
+    {{ NavbarItem(entry) }}
+@end
     </ul>
 
 </nav><!--//docs-nav-->
+@end
+
+@function NavbarItem(item)
+<li class="nav-item section-title"><a class="nav-link" href="{{ $docs.urlFor(:article, {'article': item[:slug] }) }}"><span class="theme-icon-holder mr-2"><i class="fas fa-cogs"></i></span>{{ item[:title] }}</a></li>
 @end

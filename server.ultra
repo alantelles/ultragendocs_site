@@ -1,7 +1,15 @@
 include @Core.Brook.Server
+include @Core.Request
+
+print("Setting context")
+docs_toc = Request.get('https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/docs_toc.json')
 
 s = new Server(5000, true)
+
 s.context = {
+    'tocs': {
+        'docs': JSON.parse(docs_toc.text)
+    },
     'pageTitle': 'UltraGen | scripting language | template engine | website machine',
     'redTheme': """
     <style>
@@ -14,4 +22,5 @@ s.context = {
     </style>
     """
 }
+print("Finished")
 s.run()

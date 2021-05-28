@@ -5,7 +5,7 @@ class ApiClient
 ApiClient.base = "https://raw.githubusercontent.com/alantelles/ultragendocs_content/"
 ApiClient.version = "main"
 ApiClient.driver = new Request(ApiClient.base)
-ApiClient.driver.timeout = 15
+ApiClient.driver.timeout = 25
 
 ApiClient.getArticleUrl = function(topic, article)
     ret = (ApiClient.version) + '/' + topic + '/' + article + '.md'

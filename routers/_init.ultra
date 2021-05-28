@@ -12,9 +12,9 @@ $router.get('/', :index, function(params)
     include 'templates/Index.ultra.html'
     output = Base(function(params)        
         include 'templates/components/IndexCard.ultra.html'
-        items = JSON.parse(ApiClient.getToc('docs'))
+        
         content = ''
-        for (items, item)
+        for ($request[:context][:tocs]['docs'], item)
             content += IndexCard(item)
         end
         live content
