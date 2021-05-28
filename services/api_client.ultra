@@ -1,0 +1,30 @@
+include @Core.Request
+
+class ApiClient
+
+ApiClient.base = "https://raw.githubusercontent.com/alantelles/ultragendocs_content/"
+ApiClient.version = "main"
+ApiClient.driver = new Request(ApiClient.base)
+ApiClient.driver.timeout = 15
+
+ApiClient.getArticleUrl = function(topic, article)
+    ret = (ApiClient.version) + '/' + topic + '/' + article + '.md'
+    return ret
+end
+
+ApiClient.getTocUrl = function(topic)
+    ret = (ApiClient.version) + '/' + topic + '_toc.json'
+    return ret
+end
+
+ApiClient.getArticle = function(topic, article)
+    endpoint = ApiClient.getArticleUrl(topic, article)
+    response = ApiClient.driver.run(:GET, endpoint)
+    return response.text
+end
+
+ApiClient.getToc = function(topic)
+    endpoint = ApiClient.getTocUrl(topic)
+    response = ApiClient.driver.run(:GET, endpoint)
+    return response.text
+end

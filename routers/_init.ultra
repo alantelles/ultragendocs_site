@@ -1,0 +1,14 @@
+include @Core.Web.Router
+
+include 'routers/static.ultra'
+
+$router = new Router()
+
+$router.addRouter($static)
+
+$router.get('/', :index, function(params)
+    output = Base(function(params)
+        print('chegou')
+    end)
+    live output(params)
+end)

@@ -1,0 +1,22 @@
+$static = new Router(:static, '/assets')
+
+$static.get("/plugins/bootstrap/:type/:file", :bootstrap, function(params)
+    path = 'public/assets/plugins/bootstrap/'
+    path += (params[:type]) + '/'
+    path += (params[:file])
+    AppResponse.static(path)
+end)
+
+$static.get('/fontawesome/:type/:file', :fontAwesome, function(params)
+    path = 'public/assets/fontawesome/'
+    path += (params[:type]) + '/'
+    path += (params[:file])
+    AppResponse.static(path)
+end)
+
+$static.get('/:type/:file', :assets, function(params)
+    path = 'public/assets/'
+    path += (params[:type]) + '/'
+    path += (params[:file])
+    AppResponse.static(path)
+end)
