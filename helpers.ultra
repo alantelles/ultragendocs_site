@@ -1,0 +1,29 @@
+class ArticleHelpers
+
+function findNextArticle(now) : ArticleHelpers
+    toc = $request[:context][:tocs][:docs]
+    for (toc, entry)
+        if ((entry[:slug]) == now)
+            next = _entry + 1
+            break
+        end
+    end
+    if (next == (toc.length()))
+        return false
+    end
+    return toc[next]
+end
+
+function findPreviousArticle(now) : ArticleHelpers
+    toc = $request[:context][:tocs][:docs]
+    for (toc, entry)
+        if ((entry[:slug]) == now)
+            next = _entry - 1
+            break
+        end
+    end
+    if (next == -1)
+        return false
+    end
+    return toc[next]
+end

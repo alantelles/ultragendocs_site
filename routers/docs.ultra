@@ -5,19 +5,22 @@ $docs.get('/test', :test, function(params)
 end)
 
 $docs.get('/:article', :article, function(params)
+    include @Core.OS
+    include 'helpers.ultra'
     include 'templates/ArticlePage.ultra.html'
     include 'templates/components/Navbar.ultra.html'
     navbar = Navbar($request[:context][:tocs]['docs'])
     output = ArticlePage(navbar, function(params)
         include 'templates/components/Article.ultra.html'
         include @Core.Markdown
-        doc = ApiClient.getArticle('docs', params[:article])
-        splitted = doc.split('\n')
-        
-        title = splitted[0].slice(2)
-        teaser = splitted[2].slice(1)
-        text = Markdown.parse('\n'.join(splitted.slice(4)))
-        content = Article(title, teaser, text)
+        if ((OS.getEnv('CACHE_ROOT')))
+            doc = ApiClient.getArticleFromCache('docs', params[:article])
+        else
+            doc = ApiClient.getArticle('docs', params[:article])
+        end
+        nextArt = ArticleHelpers.findNextArticle(params[:article])
+        prevArt = ArticleHelpers.findPreviousArticle(params[:article])
+        content = Article(Markdown.parse(doc), nextArt, prevArt)
         live content
     end)
     live output(params)

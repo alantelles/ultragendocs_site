@@ -1,0 +1,19 @@
+.docs-content {
+    padding-bottom: 20px;
+}
+.docs-article {
+    margin-top: 0px;
+    padding-top: 0;
+}
+
+.docs-section h1 {
+    font-size: 3em;
+}
+.docs-section h2 {
+    font-size: 2em;
+}
+.docs-section blockquote{
+    background-color: rgb(146, 18, 18);
+    color: rgb(228, 228, 228);
+    padding: 15px;
+}

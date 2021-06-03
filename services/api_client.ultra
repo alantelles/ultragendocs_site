@@ -1,4 +1,5 @@
 include @Core.Request
+include @Core.OS
 
 class ApiClient
 
@@ -6,6 +7,8 @@ ApiClient.base = "https://raw.githubusercontent.com/alantelles/ultragendocs_cont
 ApiClient.version = "main"
 ApiClient.driver = new Request(ApiClient.base)
 ApiClient.driver.timeout = 25
+
+ApiClient.cacheRoot = OS.getEnv(:CACHE_ROOT)
 
 ApiClient.getArticleUrl = function(topic, article)
     ret = (ApiClient.version) + '/' + topic + '/' + article + '.md'
@@ -21,6 +24,18 @@ ApiClient.getArticle = function(topic, article)
     endpoint = ApiClient.getArticleUrl(topic, article)
     response = ApiClient.driver.run(:GET, endpoint)
     return response.text
+end
+
+ApiClient.getArticleCachePath = function(topic, article)
+    ret = (ApiClient.cacheRoot) + '\\' + topic + '\\' + article + '.md'
+    return ret
+end
+
+ApiClient.getArticleFromCache = function(topic, article)
+    include @Core.FileSystem
+    local = ApiClient.getArticleCachePath(topic, article)
+    text = '\n'.join(FileSystem.loadText(local))
+    return text
 end
 
 ApiClient.getToc = function(topic)
