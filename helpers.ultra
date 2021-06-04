@@ -37,6 +37,13 @@ function articleNotFound(response) : ArticleHelpers
     return false
 end
 
+function processTables(parsed) : ArticleHelpers
+    rep = parsed.replace('<table>', '<div class="table-responsive my-4"><table class="table table-striped">')
+    rep = rep.replace('</table>', '</table></div>')
+    rep = rep.replace('<th>', '<th class="theme-bg-dark" style="color: #efefef">')
+    return rep
+end
+
 function processCallOuts(parsed) : ArticleHelpers
 
     function getCategory(line)

@@ -25,6 +25,7 @@ $docs.get('/:article', :article, function(params)
         else
             content = Markdown.parse(doc)
             content = ArticleHelpers.processCallOuts(content)
+            content = ArticleHelpers.processTables(content)
         end
         content = Article(content, nextArt, prevArt)
         live content
