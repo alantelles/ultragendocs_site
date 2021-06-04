@@ -22,8 +22,10 @@
     <!-- Theme CSS -->  
     <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
 
+	<!-- My CSS -->      
+    <link id="theme-style" rel="stylesheet" href="/assets/css/redtheme.css">
+
 </head> 
-{{ $request[:context][:redTheme] }}
 <body>    
     <header class="header fixed-top">	    
         <div class="branding docs-branding">
@@ -50,19 +52,32 @@
 	    <div class="theme-bg-shapes-right"></div>
 	    <div class="theme-bg-shapes-left"></div>
 	    <div class="container">
-		    <h1 class="page-heading single-col-max mx-auto">Documentation</h1>
+			<h1 class="page-heading single-col-max mx-auto">Get UltraGenic!</h1>
+			<div class="page-intro"><strong>UltraGen</strong> is a script language/template engine built to let you create web sites more easily</div>
+			<h3 style="margin-top: 20px;font-size: 2em; border-top: solid 1px white; padding:15px" class="page-heading single-col-max mx-auto">Features:</h3>
+			<div class="page-intro">
+			<ul style="text-align: left; margin: 0 10%">
+				<li>Comprehensive syntax and semantics</li>
+				<li>Built-in web needed features, like routers, cookies and session control.</li>
+				<li>Unopinionated: Choose how to build the house with the right tools in your hand</li>
+				<li>Dynamically and strongly typed</li>
+			</ul>
+			</div>
+			
+		    <!--<h1 class="page-heading single-col-max mx-auto">Documentation</h1>
 		    <div class="page-intro single-col-max mx-auto">Everything you need to write your web application with UltraGen.</div>
 		    <div class="main-search-box pt-3 d-block mx-auto">
                  <form class="search-form w-100">
 		            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
 		            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
 		        </form>
-             </div>
+             </div>-->
 	    </div>
     </div><!--//page-header-->
-    <div class="page-content">
+    <div class="page-content">		
 	    <div class="container">
 		    <div class="docs-overview py-5">
+				<h4>Browse through documentation and get everything you need to write your web UltraGen application!</h4>	
 			    <div class="row justify-content-center">
 					{{ content(params) }}				    
 			    </div><!--//row-->
@@ -74,10 +89,11 @@
 	    <div class="theme-bg-shapes-right"></div>
 	    <div class="theme-bg-shapes-left"></div>
 	    <div class="container">
-		    <h3 class="mb-2 text-white mb-3">Launch Your Software Project Like A Pro</h3>
-		    <div class="section-intro text-white mb-3 single-col-max mx-auto">Want to launch your software project and start getting traction from your target users? Check out our premium <a class="text-white" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderpro-bootstrap-4-startup-template-for-software-projects/">Bootstrap 4 startup template CoderPro</a>! It has everything you need to promote your product.</div>
+		    <h3 class="mb-2 text-white mb-3">Get UltraGenic!</h3>
+		    <div class="section-intro text-white mb-3 single-col-max mx-auto">Get to the <a style="color: white" href="/downloads"><strong>downloads</strong></a> page, find a version that fits your OS, try your <a style="color: white" href="/docs/tutorial"><strong>tutorial</strong></a> and start coding!</div>
 		    <div class="pt-3 text-center">
-			    <a class="btn btn-light" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderpro-bootstrap-4-startup-template-for-software-projects/">Get CoderPro<i class="fas fa-arrow-alt-circle-right ml-2"></i></a>
+				<p class="text-white">This application is fully written with UltraGen. You can go to github source page of this app and get a check at a real life UltraGen application source code.</p>
+			    <a class="btn btn-light" target="_blank" href="https://github.com/alantelles/ultragendocs_site"><i class="fab fa-github ml-2"></i> Source code on GitHub</a>
 		    </div>
 	    </div>
     </section><!--//cta-section-->

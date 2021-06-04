@@ -1,0 +1,7 @@
+.theme-bg-dark, .btn-primary {background-color: #af2603;}
+.btn-primary:active, .btn-primary:active {background-color: #af2603;}
+.btn-primary:hover {background-color: #c2492b;}
+.theme-icon-holder, a, .btn-light, .social-list li a {color: #be2903;}
+.docs-nav .nav-link.active {color: #be2903; border-color: #be2903}
+.btn-light:hover ,.social-list li a:hover {color: #ce5435;}
+a.theme-link:hover, a:hover {text-decoration-color: #be2903; color: #ce5435;}
