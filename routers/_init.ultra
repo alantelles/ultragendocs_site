@@ -3,8 +3,23 @@ include @Core.Web.Router
 include 'routers/static.ultra'
 include 'routers/docs.ultra'
 
+function HandlerFor404(params)
+    include 'templates/Index.ultra.html'
+    output = Base(function(params)
+        live """
+        <div class="container">
+        <img src="/assets/images/page-not-found.png"/>
+        <h1>The requested page can't be found</h1>
+        <h5>You can take this time and browse trough <a href="/docs/getting-started">documentations</a> </h5>
+        </div>
+        """
+    end)
+    live output(params)
+end
+
 $router = new Router()
 
+$router.HandlerFor404 = HandlerFor404
 $router.addRouter($static)
 $router.addRouter($docs)
 

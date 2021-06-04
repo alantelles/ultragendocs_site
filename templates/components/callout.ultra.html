@@ -1,0 +1,18 @@
+@function CallOut(content, category)
+@include 'templates/components/callout_vars.ultra'
+<div class="callout-block callout-block-{{ category }}">
+    <div class="content">
+        {{ CallOutHeader(callOutParams[category]) }}
+        <p>{{ content }}</p>
+    </div><!--//content-->
+</div><!--//callout-block-->
+@end
+
+@function CallOutHeader(category)
+<h4 class="callout-title">
+    <span class="callout-icon-holder mr-1">
+        <i class="{{ category[:icon] }}"></i>
+    </span><!--//icon-holder-->
+    {{ category[:text] }}
+</h4>
+@end

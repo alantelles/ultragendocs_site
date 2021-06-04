@@ -34,7 +34,12 @@ end
 ApiClient.getArticleFromCache = function(topic, article)
     include @Core.FileSystem
     local = ApiClient.getArticleCachePath(topic, article)
-    text = '\n'.join(FileSystem.loadText(local))
+    if ((FileSystem.isFile(local)))
+        text = '\n'.join(FileSystem.loadText(local))
+    else
+        text = '404'
+    end
+
     return text
 end
 

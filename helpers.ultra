@@ -2,6 +2,7 @@ class ArticleHelpers
 
 function findNextArticle(now) : ArticleHelpers
     toc = $request[:context][:tocs][:docs]
+    next = toc.length()
     for (toc, entry)
         if ((entry[:slug]) == now)
             next = _entry + 1
@@ -14,8 +15,9 @@ function findNextArticle(now) : ArticleHelpers
     return toc[next]
 end
 
-function findPreviousArticle(now) : ArticleHelpers
+function findPreviousArticle(now) : ArticleHelpers    
     toc = $request[:context][:tocs][:docs]
+    next = -1
     for (toc, entry)
         if ((entry[:slug]) == now)
             next = _entry - 1
@@ -26,4 +28,43 @@ function findPreviousArticle(now) : ArticleHelpers
         return false
     end
     return toc[next]
+end
+
+function articleNotFound(response) : ArticleHelpers
+    if ((response.endsWith('404')))
+        return true
+    end
+    return false
+end
+
+function processCallOuts(parsed) : ArticleHelpers
+
+    function getCategory(line)
+        pos = line.lastIndexOf(':')
+        cat = line.slice(pos + 1)
+        cut = line.slice(0, pos)
+        return [cut, cat]
+    end
+
+    include 'templates/components/callout.ultra.html'
+
+    stExp = '<pre><code class="language-callout">'
+    stExpLen = stExp.length()
+    endExp = 'callout\n</code></pre>'
+    endExpLen = endExp.length()
+    posSt = parsed.indexOf(stExp)
+    part = ''
+    output = ''
+    print(endExp.lastIndexOf('/'))
+    while (posSt > -1)
+        posEnd = parsed.indexOf(endExp)
+        part = parsed.slice(posSt + stExpLen, posEnd - 1)
+        output += parsed.slice(0, posSt)    
+        output += CallOut(*getCategory(part))
+        part = part.slice(0, part.lastIndexOf(':'))
+        parsed = parsed.slice(posEnd + endExpLen)
+        posSt = parsed.indexOf(stExp)
+    end
+    output += parsed
+    return output
 end

@@ -20,7 +20,13 @@ $docs.get('/:article', :article, function(params)
         end
         nextArt = ArticleHelpers.findNextArticle(params[:article])
         prevArt = ArticleHelpers.findPreviousArticle(params[:article])
-        content = Article(Markdown.parse(doc), nextArt, prevArt)
+        if ((ArticleHelpers.articleNotFound(doc)))
+            content = "<h2>This article does not exist</h2>"
+        else
+            content = Markdown.parse(doc)
+            content = ArticleHelpers.processCallOuts(content)
+        end
+        content = Article(content, nextArt, prevArt)
         live content
     end)
     live output(params)

@@ -1,0 +1,18 @@
+callOutParams = {
+    'info': {
+        'icon': 'fas fa-info-circle',
+        'text': 'Note'
+    },
+    'warning': {
+        'icon': 'fas fa-bullhorn',
+        'text': 'Warning'
+    },
+    'success': {
+        'icon': 'fas fa-thumbs-up',
+        'text': 'Tip'
+    },
+    'danger': {
+        'icon': 'fas fa-exclamation-triangle',
+        'text': 'Danger'
+    }
+}
