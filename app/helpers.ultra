@@ -53,7 +53,7 @@ function processCallOuts(parsed) : ArticleHelpers
         return [cut, cat]
     end
 
-    include 'templates/components/callout.ultra.html'
+    include 'app/templates/components/callout.ultra.html'
 
     stExp = '<pre><code class="language-callout">'
     stExpLen = stExp.length()

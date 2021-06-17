@@ -1,9 +1,13 @@
-include @Core.Web.AppResponseInterface
-include @Core.Request
+Router = $app.uses.Router
+Request = $app.uses.Request
+AppResponse = $app.uses.AppResponse
+ApiClient = $app.uses.ApiClient
 
-include 'routers'
-include 'services/api_client.ultra'
+$router = $app.routers.main
+$docs = $app.routers.docs
 
-$router.getMatch().localize()
+$response = new AppResponse()
+
+$router.getMatch($request[:route], $request[:method]).localize()
 
 live handler(params)

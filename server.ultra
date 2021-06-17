@@ -1,6 +1,8 @@
 include @Core.Brook.Server
 include @Core.Request
 
+include 'app'
+
 
 print("Setting context")
 docs_toc = Request.get('https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/docs_toc.json')
@@ -13,5 +15,6 @@ s.context = {
     },
     'pageTitle': 'UltraGen | scripting language | template engine | website machine'
 }
+s.app = $app
 print("Finished")
-s.run()
+s.run(false)

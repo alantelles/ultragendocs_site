@@ -1,0 +1,26 @@
+include @Core.Brook.App
+
+$app = new App(:ULTRAGEN_DOCS_SITE)
+
+include @Core.Request
+$app.uses.Request = Request
+
+include 'app/services/api_client.ultra'
+$app.uses.ApiClient = ApiClient
+
+include 'app/helpers.ultra'
+$app.uses.ArticleHelpers = ArticleHelpers
+
+include 'app/templates/ArticlePage.ultra.html'
+$app.templates.ArticlePage = ArticlePage
+
+include 'app/templates/components/Article.ultra.html'
+$app.templates.Article = Article
+
+include 'app/templates/components/Navbar.ultra.html'
+$app.templates.Navbar = Navbar
+$app.templates.NavbarItem = NavbarItem
+
+include 'app/routers'
+$app.routers.main = $router
+$app.routers.docs = $docs

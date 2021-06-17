@@ -2,7 +2,7 @@
 <nav id="docs-nav" class="docs-nav navbar">
     <ul class="section-items list-unstyled nav flex-column pb-3">
 @for (toc, entry)
-    {{ NavbarItem(entry) }}
+    {{ $app.templates.NavbarItem(entry) }}
 @end
     </ul>
 

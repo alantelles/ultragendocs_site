@@ -1,17 +1,18 @@
 $docs = new Router(:docs, '/docs')
 
 $docs.get('/test', :test, function(params)
-    include 'public/docs-page.html'
+    include 'app/public/docs-page.html'
 end)
 
 $docs.get('/:article', :article, function(params)
     include @Core.OS
-    include 'helpers.ultra'
-    include 'templates/ArticlePage.ultra.html'
-    include 'templates/components/Navbar.ultra.html'
-    navbar = Navbar($request[:context][:tocs]['docs'])
+    
+    ArticleHelpers = $app.uses.ArticleHelpers
+    
+    navbar = $app.templates.Navbar($request[:context][:tocs]['docs'])
+    ArticlePage = $app.templates.ArticlePage
+    
     output = ArticlePage(navbar, function(params)
-        include 'templates/components/Article.ultra.html'
         include @Core.Markdown
         if ((OS.getEnv('CACHE_ROOT')))
             doc = ApiClient.getArticleFromCache('docs', params[:article])
@@ -27,7 +28,7 @@ $docs.get('/:article', :article, function(params)
             content = ArticleHelpers.processCallOuts(content)
             content = ArticleHelpers.processTables(content)
         end
-        content = Article(content, nextArt, prevArt)
+        content = $app.templates.Article(content, nextArt, prevArt)
         live content
     end)
     live output(params)

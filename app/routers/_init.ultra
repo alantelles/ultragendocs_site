@@ -1,10 +1,10 @@
 include @Core.Web.Router
 
-include 'routers/static.ultra'
-include 'routers/docs.ultra'
+include 'app/routers/static.ultra'
+include 'app/routers/docs.ultra'
 
 function HandlerFor404(params)
-    include 'templates/Index.ultra.html'
+    include 'app/templates/Index.ultra.html'
     output = Base(function(params)
         live """
         <div class="container">
@@ -24,9 +24,9 @@ $router.addRouter($static)
 $router.addRouter($docs)
 
 $router.get('/', :index, function(params)
-    include 'templates/Index.ultra.html'
+    include 'app/templates/Index.ultra.html'
     output = Base(function(params)        
-        include 'templates/components/IndexCard.ultra.html'
+        include 'app/templates/components/IndexCard.ultra.html'
         
         content = ''
         for ($request[:context][:tocs]['docs'], item)
@@ -36,3 +36,4 @@ $router.get('/', :index, function(params)
     end)
     live output(params)
 end)
+
