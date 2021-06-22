@@ -17,4 +17,4 @@ s.context = {
 }
 s.app = $app
 print("Finished")
-s.run(false)
+s.run(true)

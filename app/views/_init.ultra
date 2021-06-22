@@ -1,0 +1,37 @@
+class SiteViews
+
+function index(params) : SiteViews
+    include 'app/templates/components/IndexCard.ultra.html'
+        
+    content = ''
+    for ($request[:context][:tocs]['docs'], item)
+        content += IndexCard(item)
+    end
+    live content
+end
+
+function downloads(params) : SiteViews    
+        
+    content = 'This is the downloads page'
+    live content
+end
+
+function article(params) : SiteViews
+    Markdown = $app.uses.Markdown
+    if ((OS.getEnv('CACHE_ROOT')))
+        doc = ApiClient.getArticleFromCache('docs', params[:article])
+    else
+        doc = ApiClient.getArticle('docs', params[:article])
+    end
+    nextArt = ArticleHelpers.findNextArticle(params[:article])
+    prevArt = ArticleHelpers.findPreviousArticle(params[:article])
+    if ((ArticleHelpers.articleNotFound(doc)))
+        content = "<h2>This article does not exist</h2>"
+    else
+        content = Markdown.parse(doc)
+        content = ArticleHelpers.processCallOuts(content)
+        content = ArticleHelpers.processTables(content)
+    end
+    content = $app.templates.Article(content, nextArt, prevArt)
+    live content
+end

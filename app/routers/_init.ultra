@@ -4,8 +4,8 @@ include 'app/routers/static.ultra'
 include 'app/routers/docs.ultra'
 
 function HandlerFor404(params)
-    include 'app/templates/Index.ultra.html'
-    output = Base(function(params)
+    include 'app/templates/MinimalIndex.ultra.html'
+    output = Base("Oops...", function(params)
         live """
         <div class="container">
         <img src="/assets/images/page-not-found.png"/>
@@ -25,15 +25,12 @@ $router.addRouter($docs)
 
 $router.get('/', :index, function(params)
     include 'app/templates/Index.ultra.html'
-    output = Base(function(params)        
-        include 'app/templates/components/IndexCard.ultra.html'
-        
-        content = ''
-        for ($request[:context][:tocs]['docs'], item)
-            content += IndexCard(item)
-        end
-        live content
-    end)
+    output = Base($app.uses.SiteViews.index)
     live output(params)
 end)
 
+$router.get('/download', :download, function(params)
+    include 'app/templates/MinimalIndex.ultra.html'
+    output = Base("Download", $app.uses.SiteViews.downloads)
+    live output(params)
+end)

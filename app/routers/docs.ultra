@@ -1,9 +1,5 @@
 $docs = new Router(:docs, '/docs')
 
-$docs.get('/test', :test, function(params)
-    include 'app/public/docs-page.html'
-end)
-
 $docs.get('/:article', :article, function(params)
     include @Core.OS
     
@@ -12,24 +8,6 @@ $docs.get('/:article', :article, function(params)
     navbar = $app.templates.Navbar($request[:context][:tocs]['docs'])
     ArticlePage = $app.templates.ArticlePage
     
-    output = ArticlePage(navbar, function(params)
-        include @Core.Markdown
-        if ((OS.getEnv('CACHE_ROOT')))
-            doc = ApiClient.getArticleFromCache('docs', params[:article])
-        else
-            doc = ApiClient.getArticle('docs', params[:article])
-        end
-        nextArt = ArticleHelpers.findNextArticle(params[:article])
-        prevArt = ArticleHelpers.findPreviousArticle(params[:article])
-        if ((ArticleHelpers.articleNotFound(doc)))
-            content = "<h2>This article does not exist</h2>"
-        else
-            content = Markdown.parse(doc)
-            content = ArticleHelpers.processCallOuts(content)
-            content = ArticleHelpers.processTables(content)
-        end
-        content = $app.templates.Article(content, nextArt, prevArt)
-        live content
-    end)
+    output = ArticlePage(navbar, $app.uses.SiteViews.article)
     live output(params)
 end)
