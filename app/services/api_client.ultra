@@ -27,7 +27,7 @@ ApiClient.getArticle = function(topic, article)
 end
 
 ApiClient.getArticleCachePath = function(topic, article)
-    ret = (ApiClient.cacheRoot) + '\\' + topic + '\\' + article + '.md'
+    ret = [ApiClient.cacheRoot, topic, article + '.md'].path()
     return ret
 end
 
