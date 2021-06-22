@@ -1,0 +1,17 @@
+server{
+	# for bypassing conflict with default configuration
+	# remember to expose 8080 instead of 80
+	listen 8080;
+	listen [::]:8080;
+	server_name _;
+	root /application/app/public;
+	location / {
+		try_files $uri @ultragen;
+                
+	}
+	location @ultragen {
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;		
+        proxy_pass http://localhost:5000;
+	}
+}
