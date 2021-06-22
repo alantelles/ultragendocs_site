@@ -44,14 +44,20 @@ function processTables(parsed) : ArticleHelpers
     return rep
 end
 
-function processCallOuts(parsed) : ArticleHelpers
+function getCategory(line) : ArticleHelpers
+    pos = line.lastIndexOf(':')
+    cat = line.slice(pos + 1)
+    cut = line.slice(0, pos)
+    return [cut, cat]
+end
 
-    function getCategory(line)
-        pos = line.lastIndexOf(':')
-        cat = line.slice(pos + 1)
-        cut = line.slice(0, pos)
-        return [cut, cat]
-    end
+function htmlize(str, tag) : ArticleHelpers
+    str = str.replace('[' + tag + ']', '<' + tag + '>')
+    str = str.replace('[/' + tag + ']', '</' + tag + '>')
+    return str
+end
+
+function processCallOuts(parsed) : ArticleHelpers
 
     include 'app/templates/components/callout.ultra.html'
 
@@ -62,12 +68,14 @@ function processCallOuts(parsed) : ArticleHelpers
     posSt = parsed.indexOf(stExp)
     part = ''
     output = ''
-    print(endExp.lastIndexOf('/'))
     while (posSt > -1)
         posEnd = parsed.indexOf(endExp)
         part = parsed.slice(posSt + stExpLen, posEnd - 1)
-        output += parsed.slice(0, posSt)    
-        output += CallOut(*getCategory(part))
+        output += parsed.slice(0, posSt)
+        callout = CallOut(*ArticleHelpers.getCategory(part))
+        callout = ArticleHelpers.htmlize(callout, 'code')
+        callout = ArticleHelpers.htmlize(callout, 'b')
+        output += callout
         part = part.slice(0, part.lastIndexOf(':'))
         parsed = parsed.slice(posEnd + endExpLen)
         posSt = parsed.indexOf(stExp)
