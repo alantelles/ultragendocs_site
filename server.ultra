@@ -5,10 +5,12 @@ include @Core.FileSystem
 
 include 'app'
 
-
+cacheRoot = OS.getEnv('CACHE_ROOT')
+canStop = $test(OS.getEnv('STOP_SERVER'), true)
+print(canStop)
 print("Setting context")
-if ((OS.getEnv('CACHE_ROOT')))
-    docs_toc_get = FileSystem.loadText([(OS.getEnv('CACHE_ROOT')), 'docs_toc.json'].path())
+if (cacheRoot)
+    docs_toc_get = FileSystem.loadText([cacheRoot, 'docs_toc.json'].path())
     docs_toc = ''.join(docs_toc_get)
 else
     docs_toc_get = Request.get('https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/docs_toc.json')
@@ -25,4 +27,4 @@ s.context = {
 }
 s.app = $app
 print("Finished")
-s.run(true)
+s.run(canStop)
