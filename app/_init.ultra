@@ -20,6 +20,12 @@ $app.templates.ArticlePage = ArticlePage
 include 'app/templates/components/Article.ultra.html'
 $app.templates.Article = Article
 
+include 'app/templates/MinimalIndex.ultra.html'
+$app.templates.MinimalBase = MinimalBase
+
+include 'app/templates/Index.ultra.html'
+$app.templates.Base = Base
+
 include 'app/templates/components/Navbar.ultra.html'
 $app.templates.Navbar = Navbar
 $app.templates.NavbarItem = NavbarItem

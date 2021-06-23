@@ -2,10 +2,11 @@ include @Core.Web.Router
 
 include 'app/routers/static.ultra'
 include 'app/routers/docs.ultra'
+include 'app/routers/api_ref.ultra'
 
 function HandlerFor404(params)
-    include 'app/templates/MinimalIndex.ultra.html'
-    output = Base("Oops...", function(params)
+    
+    output = MinimalBase("Oops...", function(params)
         live """
         <div class="container">
         <img src="/assets/images/page-not-found.png"/>
@@ -22,9 +23,9 @@ $router = new Router()
 $router.HandlerFor404 = HandlerFor404
 $router.addRouter($static)
 $router.addRouter($docs)
+$router.addRouter($apiRef)
 
 $router.get('/', :index, function(params)
-    include 'app/templates/Index.ultra.html'
     output = Base($app.uses.SiteViews.index)
     live output(params)
 end)

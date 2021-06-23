@@ -4,11 +4,25 @@ include @Core.OS
 class ApiClient
 
 ApiClient.base = "https://raw.githubusercontent.com/alantelles/ultragendocs_content/"
+# https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/reference/integer/index.md
 ApiClient.version = "main"
 ApiClient.driver = new Request(ApiClient.base)
 ApiClient.driver.timeout = 25
 
 ApiClient.cacheRoot = OS.getEnv(:CACHE_ROOT)
+
+# https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/reference/integer/index.md
+
+ApiClient.getMemberReferenceFromCache = function(type, member)
+    include @Core.FileSystem
+    local = [ApiClient.cacheRoot, 'reference', type, member + '.md'].path()
+    if ((FileSystem.isFile(local)))
+        text = '\n'.join(FileSystem.loadText(local))
+    else
+        text = '404'
+    end
+    return text
+end
 
 ApiClient.getArticleUrl = function(topic, article)
     ret = (ApiClient.version) + '/' + topic + '/' + article + '.md'

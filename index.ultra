@@ -3,6 +3,9 @@ Request = $app.uses.Request
 AppResponse = $app.uses.AppResponse
 ApiClient = $app.uses.ApiClient
 
+Base = $app.templates.Base
+MinimalBase = $app.templates.MinimalBase
+
 $router = $app.routers.main
 $docs = $app.routers.docs
 

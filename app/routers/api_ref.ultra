@@ -1,0 +1,16 @@
+$apiRef = new Router(:api, '/api')
+
+$apiRef.get('/:type/:member', :member, function(params)
+    ArticleHelpers = $app.uses.ArticleHelpers
+    Markdown = $app.uses.Markdown
+    output = MinimalBase('Reference', $app.uses.SiteViews.methodReference)
+    live output(params)
+end)
+
+$apiRef.get('/:type', :type, function(params)
+    ArticleHelpers = $app.uses.ArticleHelpers
+    navbar = $app.templates.Navbar($request[:context][:tocs]['docs'])
+    ArticlePage = $app.templates.ArticlePage
+    output = ArticlePage(navbar, $app.uses.SiteViews.apiRef)
+    live output(params)
+end)
