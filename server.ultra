@@ -1,17 +1,25 @@
 include @Core.Brook.Server
 include @Core.Request
+include @Core.OS
+include @Core.FileSystem
 
 include 'app'
 
 
 print("Setting context")
-docs_toc = Request.get('https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/docs_toc.json')
+if ((OS.getEnv('CACHE_ROOT')))
+    docs_toc_get = FileSystem.loadText([(OS.getEnv('CACHE_ROOT')), 'docs_toc.json'].path())
+    docs_toc = ''.join(docs_toc_get)
+else
+    docs_toc_get = Request.get('https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/docs_toc.json')
+    docs_toc = docs_toc_get.text
+end
 
 s = new Server(5000, true)
 
 s.context = {
     'tocs': {
-        'docs': JSON.parse(docs_toc.text)
+        'docs': JSON.parse(docs_toc)
     },
     'pageTitle': 'UltraGen | scripting language | template engine | website machine'
 }
