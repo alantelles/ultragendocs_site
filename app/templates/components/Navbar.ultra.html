@@ -10,5 +10,5 @@
 @end
 
 @function NavbarItem(item)
-<li class="nav-item section-title"><a class="nav-link" href="{{ $docs.urlFor(:article, {'article': item[:slug] }) }}"><span class="theme-icon-holder mr-2"><i class="fas fa-cogs"></i></span>{{ item[:title] }}</a></li>
+<li class="nav-item section-title"><a class="nav-link" href="{{ $docs.urlFor(:article, {'article': item[:slug] }) }}"><span class="theme-icon-holder mr-2"><i class="{{ item[:icon] }}"></i></span>{{ item[:title] }}</a></li>
 @end
