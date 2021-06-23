@@ -28,9 +28,3 @@ $router.get('/', :index, function(params)
     output = Base($app.uses.SiteViews.index)
     live output(params)
 end)
-
-$router.get('/download', :download, function(params)
-    include 'app/templates/MinimalIndex.ultra.html'
-    output = Base("Download", $app.uses.SiteViews.downloads)
-    live output(params)
-end)
