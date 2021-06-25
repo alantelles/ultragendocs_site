@@ -51,25 +51,10 @@ function apiRef(params) : SiteViews
         content = "<h2>This type does not exist or is not documented yet</h2>"
     else
         content = Markdown.parse(doc)
+        content = ArticleHelpers.processPermalinks(content)
         content = ArticleHelpers.processCallOuts(content)
         content = ArticleHelpers.processTables(content)
     end
     content = $app.templates.Article(content, nextArt, prevArt)
-    live content
-end
-
-function methodReference(params) : SiteViews
-    include @Core.OS
-    if ((OS.getEnv('CACHE_ROOT')))
-        doc = ApiClient.getMemberReferenceFromCache(params[:type], params[:member])
-    else
-        doc = ApiClient.getMemberReference(params[:type], params[:member])
-    end
-    if ((ArticleHelpers.articleNotFound(doc)))
-        content = "<h2>This type does not exist or is not documented yet</h2>"
-    else
-        content = Markdown.parse(doc)
-    end
-    print(content)
     live content
 end

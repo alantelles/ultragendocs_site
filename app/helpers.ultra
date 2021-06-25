@@ -57,6 +57,29 @@ function htmlize(str, tag) : ArticleHelpers
     return str
 end
 
+function processPermalinks(parsed) : ArticleHelpers
+    stExp = '<blockquote>\n<p>'
+    stExpLen = stExp.length()
+    endExp = '</p>\n</blockquote>'
+    endExpLen = endExp.length()
+    posSt = parsed.indexOf(stExp)
+    part = ''
+    output = ''
+    while (posSt > -1)
+        posEnd = parsed.indexOf(endExp)
+        part = parsed.slice(posSt + stExpLen, posEnd)
+        # part is the text
+        output += parsed.slice(0, posSt)
+        output += '<blockquote id="' + part + '">\n<p>'
+        output += part
+        output += endExp
+        parsed = parsed.slice(posEnd + endExpLen)
+        posSt = parsed.indexOf(stExp)
+    end
+    output += parsed
+    return output
+end
+
 function processCallOuts(parsed) : ArticleHelpers
 
     include 'app/templates/components/callout.ultra.html'
