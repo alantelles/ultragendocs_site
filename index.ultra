@@ -8,6 +8,7 @@ MinimalBase = $app.templates.MinimalBase
 
 $router = $app.routers.main
 $docs = $app.routers.docs
+$apiRef = $app.routers.apiRef
 
 $response = new AppResponse()
 

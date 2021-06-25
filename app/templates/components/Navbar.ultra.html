@@ -1,8 +1,8 @@
-@function Navbar(toc)
+@function Navbar(toc, topic)
 <nav id="docs-nav" class="docs-nav navbar">
     <ul class="section-items list-unstyled nav flex-column pb-3">
 @for (toc, entry)
-    {{ $app.templates.NavbarItem(entry) }}
+    {{ topic(entry) }}
 @end
     </ul>
 
@@ -11,4 +11,13 @@
 
 @function NavbarItem(item)
 <li class="nav-item section-title"><a class="nav-link" href="{{ $docs.urlFor(:article, {'article': item[:slug] }) }}"><span class="theme-icon-holder mr-2"><i class="{{ item[:icon] }}"></i></span>{{ item[:title] }}</a></li>
+@end
+
+@function NavbarApi(item)
+@ if (assigned item[:category])
+<li class="nav-item section-title"><h5>{{ item[:category] }}</h5></li>
+@else
+@link = item.get(:link, item[:title].lower())
+<li class="nav-item section-title"><a class="nav-link" href="{{ $apiRef.urlFor(:type, {'type': link }) }}"><span class="theme-icon-holder mr-2"><i class="fa fa-code"></i></span>{{ item[:title] }}</a></li>
+@end
 @end

@@ -29,6 +29,7 @@ $app.templates.Base = Base
 include 'app/templates/components/Navbar.ultra.html'
 $app.templates.Navbar = Navbar
 $app.templates.NavbarItem = NavbarItem
+$app.templates.NavbarApi = NavbarApi
 
 include 'app/views'
 $app.uses.SiteViews = SiteViews
@@ -36,3 +37,4 @@ $app.uses.SiteViews = SiteViews
 include 'app/routers'
 $app.routers.main = $router
 $app.routers.docs = $docs
+$app.routers.apiRef = $apiRef

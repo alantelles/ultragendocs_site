@@ -12,16 +12,21 @@ print("Setting context")
 if (cacheRoot)
     docs_toc_get = FileSystem.loadText([cacheRoot, 'docs_toc.json'].path())
     docs_toc = ''.join(docs_toc_get)
+    api_toc_get = FileSystem.loadText([cacheRoot, 'api_toc.json'].path())
+    api_toc = ''.join(api_toc_get)
 else
     docs_toc_get = Request.get('https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/docs_toc.json')
     docs_toc = docs_toc_get.text
+    api_toc_get = Request.get('https://raw.githubusercontent.com/alantelles/ultragendocs_content/main/api_toc.json')
+    api_toc = api_toc_get.text
 end
 
 s = new Server(5000, true)
 
 s.context = {
     'tocs': {
-        'docs': JSON.parse(docs_toc)
+        'docs': JSON.parse(docs_toc),
+        'api': JSON.parse(api_toc)
     },
     'pageTitle': 'UltraGen | scripting language | template engine | website machine'
 }

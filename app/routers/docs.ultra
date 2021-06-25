@@ -5,7 +5,7 @@ $docs.get('/:article', :article, function(params)
     
     ArticleHelpers = $app.uses.ArticleHelpers
     
-    navbar = $app.templates.Navbar($request[:context][:tocs]['docs'])
+    navbar = $app.templates.Navbar($request[:context][:tocs]['docs'], $app.templates.NavbarItem)
     ArticlePage = $app.templates.ArticlePage
     
     output = ArticlePage(navbar, $app.uses.SiteViews.article)
