@@ -1,10 +1,5 @@
-Router = $app.uses.Router
-Request = $app.uses.Request
-AppResponse = $app.uses.AppResponse
-ApiClient = $app.uses.ApiClient
-
-Base = $app.templates.Base
-MinimalBase = $app.templates.MinimalBase
+localizeAttrs($app.uses)
+localizeAttrs($app.templates)
 
 $router = $app.routers.main
 $docs = $app.routers.docs

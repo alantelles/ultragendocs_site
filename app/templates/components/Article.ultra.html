@@ -1,13 +1,14 @@
 @function Article(text, next, prev)
 <article class="docs-article" id="section-1">
         <section class="docs-section">
-            {{ text }}
+            {{ text }} 
         </section>
 </article>
-@if(prev)
-    <a href="{{ $docs.urlFor(:article, {:article: prev[:slug]}) }}"><button class="btn btn-primary">&lt;&lt; {{ prev[:title] }}</button></a>
+@if (typeof(prev) == Dict) 
+<a href="{{ $docs.urlFor(:article, {:article: prev[:slug]}) }}"><button class="btn btn-primary">&lt;&lt; {{ prev[:title] }}</button></a> 
 @end
-@if(next)
-    <a href="{{ $docs.urlFor(:article, {:article: next[:slug]}) }}"><button class="btn btn-primary">{{ next[:title] }} &gt;&gt;</button></a>
+@if (typeof(next) == Dict) 
+<a href="{{ $docs.urlFor(:article, {:article: next[:slug]}) }}"><button class="btn btn-primary">{{ next[:title] }} &gt;&gt;</button></a> 
 @end
+
 @end
